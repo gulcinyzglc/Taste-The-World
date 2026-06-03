@@ -145,7 +145,7 @@ TasteTheWorld/
 
 ## 👩‍💻 Author
 
-Gülçin Yüzügüleç
+Gülçin Yüzgüleç
 
 3rd Year Computer Engineering Student
 
