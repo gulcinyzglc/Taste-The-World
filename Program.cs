@@ -16,7 +16,7 @@ builder.Services.AddSession(options =>
 
 var app = builder.Build();
 
-// Migrations ile veritabanı oluştur
+
 using (var scope = app.Services.CreateScope())
 {
     var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
