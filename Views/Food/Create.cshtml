@@ -25,6 +25,13 @@
                                 <label asp-for="Emoji" class="form-label fw-bold">Emoji</label>
                                 <input asp-for="Emoji" class="form-control" placeholder="🍕" />
                             </div>
+                            <div class="col-md-12 mt-2">
+                                <label asp-for="ImageUrl" class="form-label fw-bold">Image URL <span class="text-muted fw-normal">(optional)</span></label>
+                                <input asp-for="ImageUrl" class="form-control" id="imageUrlInput" placeholder="https://example.com/image.jpg" />
+                                <div class="mt-2" id="imagePreview" style="display:none">
+                                    <img id="previewImg" src="" alt="Preview" class="rounded" style="height:120px;object-fit:cover;border:1px solid #dee2e6" />
+                                </div>
+                            </div>
                             <div class="col-md-6">
                                 <label asp-for="Category" class="form-label fw-bold">Category *</label>
                                 <select asp-for="Category" class="form-select" required>
@@ -94,3 +101,20 @@
         </div>
     </div>
 </div>
+
+@section Scripts {
+<script>
+document.getElementById('imageUrlInput').addEventListener('input', function() {
+    var url = this.value.trim();
+    var preview = document.getElementById('imagePreview');
+    var img = document.getElementById('previewImg');
+    if (url) {
+        img.src = url;
+        img.onload = function() { preview.style.display = 'block'; };
+        img.onerror = function() { preview.style.display = 'none'; };
+    } else {
+        preview.style.display = 'none';
+    }
+});
+</script>
+}

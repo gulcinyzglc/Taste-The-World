@@ -26,6 +26,20 @@
                                 <label asp-for="Emoji" class="form-label fw-bold">Emoji</label>
                                 <input asp-for="Emoji" class="form-control" />
                             </div>
+                            <div class="col-md-12 mt-2">
+                                <label asp-for="ImageUrl" class="form-label fw-bold">Image URL <span class="text-muted fw-normal">(optional)</span></label>
+                                <input asp-for="ImageUrl" class="form-control" id="imageUrlInput" />
+                                <div class="mt-2" id="imagePreview">
+                                    @if (!string.IsNullOrEmpty(Model.ImageUrl))
+                                    {
+                                        <img id="previewImg" src="@Model.ImageUrl" alt="Preview" class="rounded" style="height:120px;object-fit:cover;border:1px solid #dee2e6" />
+                                    }
+                                    else
+                                    {
+                                        <img id="previewImg" src="" alt="Preview" class="rounded" style="height:120px;object-fit:cover;border:1px solid #dee2e6;display:none" />
+                                    }
+                                </div>
+                            </div>
                             <div class="col-md-6">
                                 <label asp-for="Category" class="form-label fw-bold">Category</label>
                                 <select asp-for="Category" class="form-select">
@@ -85,3 +99,19 @@
         </div>
     </div>
 </div>
+
+@section Scripts {
+<script>
+document.getElementById('imageUrlInput').addEventListener('input', function() {
+    var url = this.value.trim();
+    var img = document.getElementById('previewImg');
+    if (url) {
+        img.src = url;
+        img.style.display = 'block';
+        img.onerror = function() { img.style.display = 'none'; };
+    } else {
+        img.style.display = 'none';
+    }
+});
+</script>
+}
