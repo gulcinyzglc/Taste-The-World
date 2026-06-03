@@ -1,61 +1,152 @@
-# Taste The World 🌍🍽️
+<div align="center">
 
-**Taste The World**, dünyanın farklı şehirlerindeki eşsiz lezzetleri keşfetmenizi, favori yemeklerinizi puanlamanızı ve kendi gastronomi "Ölmeden Önce Yenilecekler" (Bucket List) listenizi oluşturmanızı sağlayan bir ASP.NET Core MVC web uygulamasıdır.
+# 🌍 TasteTheWorld
 
-## 🚀 Özellikler
+**Discover the world's most iconic dishes, one city at a time.**
 
-- **Kullanıcı Kimlik Doğrulaması:** Kayıt olma ve giriş yapma işlemleri (Session tabanlı oturum yönetimi).
-- **Şehir ve Yemek Keşfi:** Dünyanın farklı şehirlerine ait popüler yemeklerin listelenmesi ve detaylı incelenmesi.
-- **Yemek Detayları:** Yemeklerin açıklaması, görseli, fiyat aralığı (₺₺₺), baharatlı/vejetaryen olma durumu ve kategorisi gibi detaylı bilgiler.
-- **Değerlendirme Sistemi:** Yemeklere yorum yapma ve puan verme imkanı.
-- **Kişisel Bucket List:** Kullanıcıların denemek istedikleri yemekleri kendi "Bucket List" (İstek Listesi) alanlarına eklemesi ve yönetmesi.
+<p>
+  <img src="https://img.shields.io/badge/.NET-10.0-512BD4?style=flat-square&logo=dotnet&logoColor=white" />
+  <img src="https://img.shields.io/badge/Bootstrap-5.3-7952B3?style=flat-square&logo=bootstrap&logoColor=white" />
+  <img src="https://img.shields.io/badge/SQLite-EF%20Core-003B57?style=flat-square&logo=sqlite&logoColor=white" />
+  <img src="https://img.shields.io/badge/C%23-ASP.NET%20MVC-239120?style=flat-square&logo=csharp&logoColor=white" />
+</p>
 
-## 💻 Kullanılan Teknolojiler
+<p>
+  <a href="#-overview">Overview</a> •
+  <a href="#-features">Features</a> •
+  <a href="#-getting-started">Getting Started</a> •
+  <a href="#-architecture">Architecture</a>
+</p>
 
-- **Backend:** C#, ASP.NET Core MVC (.NET 10.0)
-- **Veritabanı:** SQLite & Entity Framework Core (Code-First yaklaşımı)
-- **Frontend:** HTML, CSS, JavaScript, Razor Views (Standart MVC yapısı)
+</div>
 
-## 📁 Proje Yapısı
+---
 
-- `Controllers/`: HTTP isteklerini işleyen ve yönlendiren denetleyiciler (`Account`, `City`, `Food`, `BucketList`, `Home`).
-- `Models/`: Veritabanı tablolarını temsil eden sınıflar (`User`, `Food`, `City`, `BucketList`, `Review`).
-- `Views/`: Kullanıcı arayüzünü (UI) oluşturan Razor sayfaları.
-- `Data/`: Entity Framework `AppDbContext` ayarları ve veritabanı bağlantı yapılandırmaları.
-- `wwwroot/`: Statik dosyalar (CSS, JS, Görseller).
-- `tastetheworld.db`: Uygulamanın SQLite veritabanı dosyası.
+## 📖 Overview
 
-## ⚙️ Kurulum ve Çalıştırma
+**TasteTheWorld** is a full-stack web application built with **ASP.NET Core MVC** and **Entity Framework Core**. It allows users to explore iconic dishes from 15 cities around the world, manage a personal food bucket list, and write reviews.
 
-Projeyi yerel ortamınızda çalıştırmak için aşağıdaki adımları izleyebilirsiniz:
+The app follows the **MVC pattern** with a **Code First** database approach using **SQLite**. Authentication is handled via **ASP.NET Core Session**. All data is seeded automatically on first run through EF Core migrations.
 
-1. **Projeyi Klonlayın veya İndirin:**
-   ```bash
-   git clone <repo-url>
-   cd TasteTheWorld
-   ```
+---
 
-2. **Gerekli Bağımlılıkları Yükleyin:**
-   ```bash
-   dotnet restore
-   ```
+## ✨ Features
 
-3. **Veritabanını Hazırlayın:**
-   Proje çalıştırıldığında `Program.cs` içerisindeki `db.Database.EnsureCreated();` metodu sayesinde veritabanı (SQLite) otomatik olarak oluşturulacaktır. Herhangi bir migration komutu çalıştırmanıza gerek yoktur, ancak migration kullanmak isterseniz:
-   ```bash
-   dotnet ef database update
-   ```
+| Feature | Details |
+|---|---|
+| 🔍 Search & Filter | Filter by name, city, category, spicy, or vegetarian |
+| 🏙️ City Explorer | 15 cities with dedicated pages and dish listings |
+| ❤️ Bucket List | Per-user saved dishes with tried/untried tracking |
+| ⭐ Reviews | Star ratings and comments per dish |
+| 🔐 Auth | Register, login, logout with session management |
+| ➕ CRUD | Full create, read, update, delete for foods |
+| 📱 Responsive | Bootstrap 5 grid — mobile, tablet, desktop |
 
-4. **Uygulamayı Çalıştırın:**
-   ```bash
-   dotnet run
-   ```
-   Uygulama varsayılan olarak `https://localhost:5001` veya `http://localhost:5000` portlarında çalışacaktır.
+---
 
-## 👥 Katkıda Bulunma
+## 🛠️ Tech Stack
 
-Bu proje geliştirilmeye açıktır. Katkıda bulunmak isterseniz bir `Pull Request` oluşturabilir veya karşılaştığınız sorunları `Issues` sekmesinden bildirebilirsiniz.
+| Layer | Technology |
+|---|---|
+| Framework | ASP.NET Core MVC (.NET 10) |
+| ORM | Entity Framework Core 9 |
+| Database | SQLite — Code First with Migrations |
+| UI | Bootstrap 5.3, Bootstrap Icons |
+| Auth | ASP.NET Core Session |
+| Frontend Logic | Vanilla JavaScript — DOM manipulation, form validation |
 
-## 📄 Lisans
+---
 
-Bu proje eğitim ve kişisel gelişim amacıyla oluşturulmuştur. Özel bir lisansa sahip değildir.
+## 🚀 Getting Started
+
+### Prerequisites
+
+- [.NET 10 SDK](https://dotnet.microsoft.com/download)
+- EF Core CLI:
+
+```bash
+dotnet tool install --global dotnet-ef
+```
+
+### Run Locally
+
+```bash
+git clone https://github.com/gulcinyzglc/Taste-The-World.git
+cd Taste-The-World
+dotnet restore
+dotnet ef database update
+dotnet run
+```
+
+Open `https://localhost:5128` in your browser.
+
+> 💡 Place city images in `wwwroot/images/cities/` and food images in `wwwroot/images/foods/` — the app falls back to emojis if images are missing.
+
+---
+
+## 🏗️ Architecture
+
+```
+TasteTheWorld/
+├── Controllers/
+│   ├── AccountController.cs        # Register, Login, Logout
+│   ├── BucketListController.cs     # Index, Toggle, MarkTried
+│   ├── CityController.cs           # Index, Details
+│   ├── FoodController.cs           # Index, Details, Create, Edit, Delete, AddReview
+│   └── HomeController.cs           # Index, About
+│
+├── Data/
+│   └── AppDbContext.cs             # DbContext + seed data (15 cities, 40 foods)
+│
+├── Migrations/
+│   └── InitialCreate               # EF Core initial migration
+│
+├── Models/
+│   ├── BucketList.cs               # BucketList + Review models
+│   ├── City.cs
+│   ├── ErrorViewModel.cs
+│   ├── Food.cs
+│   └── User.cs
+│
+├── Views/
+│   ├── Account/                    # Login, Register
+│   ├── BucketList/                 # Index
+│   ├── City/                       # Index, Details
+│   ├── Food/                       # Index, Details, Create, Edit
+│   ├── Home/                       # Index, About
+│   └── Shared/                     # _Layout, _ViewImports, _ViewStart
+│
+├── wwwroot/
+│   ├── css/site.css
+│   ├── js/site.js
+│   └── images/
+│       ├── cities/
+│       └── foods/
+│
+├── Properties/
+│   └── launchSettings.json
+├── Program.cs
+└── TasteTheWorld.csproj
+```
+
+---
+
+## 🌆 Cities
+
+```
+🇹🇷 Istanbul   🇯🇵 Tokyo      🇮🇹 Naples     🇹🇭 Bangkok    🇫🇷 Paris
+🇪🇸 Madrid     🇪🇸 Barcelona  🇺🇸 New York   🇦🇪 Dubai      🇸🇬 Singapore
+🇩🇪 Berlin     🇮🇳 Mumbai     🇵🇪 Lima       🇲🇽 Mexico City 🇲🇦 Marrakech
+```
+
+---
+
+
+
+## 👩‍💻 Author
+
+Gülçin Yüzügüleç
+
+3rd Year Computer Engineering Student
+
+ASP.NET Core MVC | C# | SQL | Web Development
