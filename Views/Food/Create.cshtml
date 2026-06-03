@@ -1,0 +1,96 @@
+@model TasteTheWorld.Models.Food
+@{
+    ViewData["Title"] = "Add Food";
+    var cities = ViewBag.Cities as List<TasteTheWorld.Models.City> ?? new();
+}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-7">
+            <div class="card border-0 shadow-sm">
+                <div class="card-header bg-warning text-dark fw-bold fs-5">
+                    <i class="bi bi-plus-circle"></i> Add New Food
+                </div>
+                <div class="card-body p-4">
+                    <form asp-action="Create" method="post">
+                        <div class="mb-3">
+                            <label asp-for="Name" class="form-label fw-bold">Food Name *</label>
+                            <input asp-for="Name" class="form-control" placeholder="e.g. Iskender Kebap" required />
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="Description" class="form-label fw-bold">Description *</label>
+                            <textarea asp-for="Description" class="form-control" rows="3" placeholder="Briefly describe this dish..." required></textarea>
+                        </div>
+                        <div class="row g-3 mb-3">
+                            <div class="col-md-6">
+                                <label asp-for="Emoji" class="form-label fw-bold">Emoji</label>
+                                <input asp-for="Emoji" class="form-control" placeholder="🍕" />
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="Category" class="form-label fw-bold">Category *</label>
+                                <select asp-for="Category" class="form-select" required>
+                                    <option value="">Select...</option>
+                                    <option>Sokak Yemeği</option>
+                                    <option>Et Yemeği</option>
+                                    <option>Deniz Ürünleri</option>
+                                    <option>Pizza</option>
+                                    <option>Çorba</option>
+                                    <option>Tatlı</option>
+                                    <option>Erişte</option>
+                                    <option>Pastane</option>
+                                    <option>Izgara</option>
+                                    <option>Meze</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row g-3 mb-3">
+                            <div class="col-md-6">
+                                <label asp-for="CityId" class="form-label fw-bold">City *</label>
+                                <select asp-for="CityId" class="form-select" required>
+                                    <option value="">Select a city...</option>
+                                    @foreach (var city in cities)
+                                    {
+                                        <option value="@city.Id">@city.CountryFlag @city.Name, @city.Country</option>
+                                    }
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="PriceRange" class="form-label fw-bold">Price Range</label>
+                                <select asp-for="PriceRange" class="form-select">
+                                    <option value="₺">₺ - Very Cheap</option>
+                                    <option value="₺₺">₺₺ - Cheap</option>
+                                    <option value="€€">€€ - Moderate</option>
+                                    <option value="€€€">€€€ - Expensive</option>
+                                    <option value="€€€€">€€€€ - Very Expensive</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row g-3 mb-3">
+                            <div class="col-md-6">
+                                <label asp-for="Rating" class="form-label fw-bold">Rating (1-5)</label>
+                                <input asp-for="Rating" type="number" step="0.1" min="1" max="5" class="form-control" value="4.5" />
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="ReviewCount" class="form-label fw-bold">Review Count</label>
+                                <input asp-for="ReviewCount" type="number" class="form-control" value="0" />
+                            </div>
+                        </div>
+                        <div class="d-flex gap-4 mb-4">
+                            <div class="form-check">
+                                <input asp-for="IsSpicy" type="checkbox" class="form-check-input" />
+                                <label asp-for="IsSpicy" class="form-check-label">🌶️ Spicy</label>
+                            </div>
+                            <div class="form-check">
+                                <input asp-for="IsVegetarian" type="checkbox" class="form-check-input" />
+                                <label asp-for="IsVegetarian" class="form-check-label">🥗 Vegetarian</label>
+                            </div>
+                        </div>
+                        <div class="d-flex gap-2">
+                            <button type="submit" class="btn btn-warning fw-bold flex-grow-1"><i class="bi bi-plus-circle"></i> Add Food</button>
+                            <a asp-action="Index" class="btn btn-outline-secondary">Cancel</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,40 @@
+@model List<TasteTheWorld.Models.City>
+@{
+    ViewData["Title"] = "Cities";
+}
+<div class="container py-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="section-title"><i class="bi bi-buildings text-warning"></i> All Cities</h2>
+        <span class="badge bg-warning text-dark fs-6">@Model.Count cities</span>
+    </div>
+    <div class="row g-4">
+        @foreach (var city in Model)
+        {
+            <div class="col-6 col-md-4 col-lg-3">
+                <a asp-action="Details" asp-route-id="@city.Id" class="text-decoration-none">
+                    <div class="city-card-lg position-relative" style="background:@city.BgColor">
+                        @if (!string.IsNullOrEmpty(city.ImageUrl))
+                        {
+                            <img src="@city.ImageUrl" alt="@city.Name"
+                                 onerror="this.style.display='none'; this.nextElementSibling.style.display='block'"
+                                 style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:16px;opacity:0.6" />
+                            <div style="display:none" class="city-card-emoji">@city.Emoji</div>
+                        }
+                        else
+                        {
+                            <div class="city-card-emoji">@city.Emoji</div>
+                        }
+                        <div class="city-card-overlay"></div>
+                        <div class="city-card-content">
+                            <div class="city-card-flag">@city.CountryFlag</div>
+                            <h5 class="city-card-name">@city.Name</h5>
+                            <div class="city-card-sub">@city.Country</div>
+                            <span class="badge bg-warning text-dark mt-2">@city.Foods.Count dishes</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        }
+    </div>
+</div>
+
