@@ -10,21 +10,41 @@ public class FoodController : Controller
     private readonly AppDbContext _db;
     public FoodController(AppDbContext db) { _db = db; }
 
-    public async Task<IActionResult> Index(string? category, string? search, bool? spicy, bool? vegetarian)
+    public async Task<IActionResult> Index(string? category, string? search, bool? spicy, bool? vegetarian, int page = 1)
     {
+        int pageSize = 8;
         var query = _db.Foods.Include(f => f.City).AsQueryable();
+
         if (!string.IsNullOrEmpty(search))
             query = query.Where(f => f.Name.Contains(search) || f.City!.Name.Contains(search));
         if (!string.IsNullOrEmpty(category))
             query = query.Where(f => f.Category == category);
-        if (spicy == true) query = query.Where(f => f.IsSpicy);
-        if (vegetarian == true) query = query.Where(f => f.IsVegetarian);
+        if (spicy == true)
+            query = query.Where(f => f.IsSpicy);
+        if (vegetarian == true)
+            query = query.Where(f => f.IsVegetarian);
+
+        int totalItems = await query.CountAsync();
+        int totalPages = (int)Math.Ceiling(totalItems / (double)pageSize);
+
+        var foods = await query
+            .OrderByDescending(f => f.Rating)
+            .Skip((page - 1) * pageSize)
+            .Take(pageSize)
+            .ToListAsync();
 
         ViewBag.Categories = await _db.Foods.Select(f => f.Category).Distinct().ToListAsync();
         ViewBag.Search = search;
         ViewBag.Category = category;
         ViewBag.IsLoggedIn = HttpContext.Session.GetString("UserEmail") != null;
-        return View(await query.OrderByDescending(f => f.Rating).ToListAsync());
+        ViewBag.CurrentPage = page;
+        ViewBag.TotalPages = totalPages;
+        ViewBag.Search = search;
+        ViewBag.Category = category;
+        ViewBag.Spicy = spicy;
+        ViewBag.Vegetarian = vegetarian;
+
+        return View(foods);
     }
 
     public async Task<IActionResult> Details(int id)
