@@ -71,7 +71,7 @@ dotnet tool install --global dotnet-ef
 ### Run Locally
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/Taste-The-World.git
+git clone https://github.com/gulcinyzglc/Taste-The-World.git
 cd Taste-The-World
 dotnet restore
 dotnet ef database update
@@ -89,34 +89,45 @@ Open `https://localhost:5128` in your browser.
 ```
 TasteTheWorld/
 ├── Controllers/
-│   ├── HomeController.cs         # Index, About
-│   ├── FoodController.cs         # CRUD + AddReview
-│   ├── CityController.cs         # Index, Details
-│   ├── AccountController.cs      # Register, Login, Logout
-│   └── BucketListController.cs   # Index, Toggle, MarkTried
+│   ├── AccountController.cs        # Register, Login, Logout
+│   ├── BucketListController.cs     # Index, Toggle, MarkTried
+│   ├── CityController.cs           # Index, Details
+│   ├── FoodController.cs           # Index, Details, Create, Edit, Delete, AddReview
+│   └── HomeController.cs           # Index, About
+│
 ├── Data/
-│   └── AppDbContext.cs            # DbContext + seed data (15 cities, 40 foods)
+│   └── AppDbContext.cs             # DbContext + seed data (15 cities, 40 foods)
+│
+├── Migrations/
+│   └── InitialCreate               # EF Core initial migration
+│
 ├── Models/
-│   ├── Food.cs
+│   ├── BucketList.cs               # BucketList + Review models
 │   ├── City.cs
-│   ├── User.cs
-│   └── BucketList.cs              # Includes Review model
-├── Views/                         # Razor (.cshtml) views per controller
-├── Migrations/                    # EF Core migration history
-├── wwwroot/                       # CSS, JS, images
-└── Program.cs                     # App configuration + middleware pipeline
+│   ├── ErrorViewModel.cs
+│   ├── Food.cs
+│   └── User.cs
+│
+├── Views/
+│   ├── Account/                    # Login, Register
+│   ├── BucketList/                 # Index
+│   ├── City/                       # Index, Details
+│   ├── Food/                       # Index, Details, Create, Edit
+│   ├── Home/                       # Index, About
+│   └── Shared/                     # _Layout, _ViewImports, _ViewStart
+│
+├── wwwroot/
+│   ├── css/site.css
+│   ├── js/site.js
+│   └── images/
+│       ├── cities/
+│       └── foods/
+│
+├── Properties/
+│   └── launchSettings.json
+├── Program.cs
+└── TasteTheWorld.csproj
 ```
-
-### Data Models
-
-```
-City ──< Food ──< Review
-              └──< BucketList >── User
-```
-
-- `City` has many `Food`
-- `Food` has many `Review` and many `BucketList`
-- `BucketList` belongs to a `User`
 
 ---
 
@@ -132,7 +143,10 @@ City ──< Food ──< Review
 
 
 
+## 👩‍💻 Author
 
-<div align="center">
-  <p>Made with ❤️ by <a href="https://github.com/gulcinyzglc"><strong>Gülçin Yüzgüleç</strong></a></p>
-</div>
+Gülçin Yüzügüleç
+
+3rd Year Computer Engineering Student
+
+ASP.NET Core MVC | C# | SQL | Web Development
